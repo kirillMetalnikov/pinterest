@@ -1,13 +1,14 @@
 import {
   ADD_CARD,
-  DELETE_CARD
+  DELETE_CARD,
+  LIKE
 } from '../consts.js'
 
 
 export const addCard = (id, image, description, user) => dispatch => {
   var card = {
     id,
-    image: 'https://ic.pics.livejournal.com/narkom/4470119/425477/425477_1000.jpg',
+    image,
     description: 'add test description',
     user: 'add test user',
     likes: 0
@@ -17,6 +18,9 @@ export const addCard = (id, image, description, user) => dispatch => {
 }
 
 export const deleteCard = (id) => dispatch => {
-  console.log(id)
   dispatch({type: DELETE_CARD, payload: id})
+}
+
+export const like = id => dispatch => {
+  dispatch({type: LIKE, payload: id})
 }

@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux'
 import {
   ADD_CARD,
-  DELETE_CARD
+  DELETE_CARD,
+  LIKE
 } from '../consts.js'
 
 const initialState = [
@@ -54,6 +55,15 @@ const cards = (state = initialState, action) => {
       return state.filter( card => {
 //        console.log(action.payload)
         return card.id != action.payload
+      })
+    case LIKE:
+      return state.map( card => {
+        if(card.id == action.payload) {
+          var newCard = Object.assign({}, card)
+          newCard.likes = ++newCard.likes
+          return newCard
+        }
+        return card
       })
     default:
       return state
