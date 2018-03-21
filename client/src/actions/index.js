@@ -24,3 +24,16 @@ export const deleteCard = (id) => dispatch => {
 export const like = id => dispatch => {
   dispatch({type: LIKE, payload: id})
 }
+
+
+export const getCurrentUser = () => dispatch => {
+  console.log('getCurentUser')
+}
+
+export const logout = () => dispatch => {
+  console.log('logout')
+}
+
+export const login = () => dispatch => {
+  console.log('login')
+}
