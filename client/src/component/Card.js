@@ -5,22 +5,30 @@ class Card extends Component {
     super(props)
   }
 
+  hundleDelete(id) {
+    return () => this.props.deleteCard(id)
+  }
+
+
+  hundleLike(id) {
+    return () =>   this.props.like(id)
+  }
+
   render() {
-    var {image, description, user, likes, id, hundleLike, hundleDelete} = this.props
-    console.log(image, description, user, likes, id)
+    var {image, description, user, likes, id} = this.props
     return (
-      <div key = {id} className = 'grid-item'>
+      <div>
         <img src = {image} />
         <div>{description}</div>
         <div>{user}</div>
         <div
           style ={{backgroundColor: 'yellow'}}
-          onClick = {hundleLike(id)}
+          onClick = {this.hundleLike.bind(this)(id)}
         >
           {likes}
         </div>
         <div>{id}</div>
-        <button onClick={hundleDelete(id)}>Delete</button>
+        <button onClick={this.hundleDelete.bind(this)(id)}>Delete</button>
       </div>
     )
   }

@@ -4,8 +4,9 @@ import {
   LIKE
 } from '../consts.js'
 
-
-export const addCard = (id, image, description, user) => dispatch => {
+var id = 6
+export const addCard = (image, description, user) => dispatch => {
+  id++
   var card = {
     id,
     image,
