@@ -5,17 +5,17 @@ class Card extends Component {
     super(props)
   }
 
-  hundleDelete(id) {
-    return () => this.props.deleteCard(id)
+  hundleDelete(_id) {
+    return () => this.props.deleteCard(_id)
   }
 
 
-  hundleLike(id) {
-    return () =>   this.props.like(id)
+  hundleLike(_id) {
+    return () =>   this.props.like(_id)
   }
 
   render() {
-    var {src, description, user, likes, id, type} = this.props
+    var {src, description, user, likes, _id, type} = this.props
     return (
       <div>
         {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen = {false}/>}
@@ -23,12 +23,12 @@ class Card extends Component {
         <div>{user}</div>
         <div
           style ={{backgroundColor: 'yellow'}}
-          onClick = {this.hundleLike.bind(this)(id)}
+          onClick = {this.hundleLike.bind(this)(_id)}
         >
           {likes}
         </div>
-        <div>{id}</div>
-        <button onClick={this.hundleDelete.bind(this)(id)}>Delete</button>
+        <div>{_id}</div>
+        <button onClick={this.hundleDelete.bind(this)(_id)}>Delete</button>
       </div>
     )
   }

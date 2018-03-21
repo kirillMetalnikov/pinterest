@@ -16,12 +16,12 @@ const cards = (state = [], action) => {
 
     case DELETE_CARD:
       return state.filter( card => {
-        return card.id != action.payload
+        return card._id != action.payload
       })
 
     case LIKE:
       return state.map( card => {
-        if(card.id == action.payload) {
+        if(card._id == action.payload) {
           var newCard = Object.assign({}, card)
           newCard.likes = ++newCard.likes
           return newCard

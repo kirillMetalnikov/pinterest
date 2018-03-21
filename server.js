@@ -1,42 +1,31 @@
 var express = require('express')
 var fallback = require('express-history-api-fallback')
 var bodyParser = require('body-parser')
+var mongoose = require('mongoose')
+var passport = require('passport')
+var session = require('express-session')
 
 var app = express()
 var path = process.cwd()
 
-//  start temp
-var id = 6
-var cards = require('./tempData')
-//  end temp
+mongoose.connect(process.env.MONGO_URI)
 
+require('./app/config/passport')(passport)
 
 app.use('/client', express.static(path + '/client'))
 app.use('/public', express.static(path + '/client/public'))
 app.use(bodyParser.json())
+app.use(session({
+	secret: process.env.SESSION_KEY,
+	resave: false,
+	saveUninitialized: true,
+	maxAge: 60000,
+	expires: 60000
+}));
+app.use(passport.initialize())
+app.use(passport.session())
 
-app.route('/')
-  .get((req, res) => {
-    res.sendFile(path + '/client/public/index.html')
-  })
-
-app.route('/api/cards')
-  .get( (req, res) => {
-    res.json({cards})
-  })
-  .post( (req, res) => {
-    var {card} = req.body
-
-    id++
-    card.id = id
-    card.user = 'test'
-    card.likes = 0
-
-
-    cards.push(card)
-    res.json({card})
-  })
-
+require('./app/routes/index.js')(app, passport)
 
 app.use(fallback(process.cwd() + '/client/public/index.html'))
 
