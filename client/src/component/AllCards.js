@@ -1,9 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import {getCards} from '../actions'
+
 class AllCards extends Component {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    this.props.getCards()
   }
 
   render() {
@@ -13,4 +19,4 @@ class AllCards extends Component {
   }
 }
 
-export default connect()(AllCards)
+export default connect(null, {getCards})(AllCards)

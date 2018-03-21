@@ -1,21 +1,32 @@
+import axios from 'axios'
+
 import {
   ADD_CARD,
+  GET_CARDS,
   DELETE_CARD,
   LIKE
 } from '../consts.js'
 
-var id = 6
-export const addCard = (image, description, user) => dispatch => {
-  id++
-  var card = {
-    id,
-    image,
-    description: 'add test description',
-    user: 'add test user',
-    likes: 0
-  }
 
-  dispatch({type: ADD_CARD, payload: card})
+var id = 6
+export const addCard = (src, type, description) => dispatch => {
+  axios.post('/api/cards', {card: {src, type, description}})
+    .then( res => {
+      var {card} = res.data
+      if (card) {
+        dispatch({type: ADD_CARD, payload: card})
+      }
+    })
+
+}
+export const getCards = () => dispatch => {
+  axios.get('/api/cards')
+    .then( res => {
+      var {cards} = res.data
+      if(cards) {
+        dispatch({type: GET_CARDS, payload: cards})
+      }
+    })
 }
 
 export const deleteCard = (id) => dispatch => {

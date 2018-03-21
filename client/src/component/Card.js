@@ -15,10 +15,10 @@ class Card extends Component {
   }
 
   render() {
-    var {image, description, user, likes, id} = this.props
+    var {src, description, user, likes, id, type} = this.props
     return (
       <div>
-        <img src = {image} />
+        {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen = {false}/>}
         <div>{description}</div>
         <div>{user}</div>
         <div

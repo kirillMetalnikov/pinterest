@@ -11,7 +11,6 @@ class CardList extends Component {
   }
 
   componentDidMount() {
-    this.grid = document.querySelector('.masonry-grid')
     this.msnry()
     this.errorImg()
   }
@@ -22,13 +21,15 @@ class CardList extends Component {
   }
 
   errorImg() {
+    var componentThis = this
     $('img').on('error', function () { // () => {} is not right form escription, because 'this' not bind with 'img'
         $(this).attr('src', '/public/img/missing.png')
+        componentThis.msnry.bind(componentThis)()
       })
   }
 
   msnry() {
-    new Masonry(this.grid, {
+    new Masonry(this.refs.msnryRef, {
       itemSelector: '.grid-item',
       columnWidth: 400
     })
@@ -37,9 +38,8 @@ class CardList extends Component {
   render() {
     var {cards} = this.props
     var {like, deleteCard} = this.props
-
     return (
-      <div className = 'masonry-grid'>
+      <div className = 'masonry-grid' ref = 'msnryRef'>
           {cards.map( card => {
             return (
               <div  key = {card.id} className = 'grid-item'>

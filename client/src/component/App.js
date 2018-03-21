@@ -12,15 +12,16 @@ import Login from './Login'
 import Logout from './Logout'
 import Page404 from './Page404'
 
-import {getCurrentUser} from '../actions'
+import {getCurrentUser, getCards} from '../actions'
 
 class App extends Component {
   constructor(props) {
     super(props)
   }
 
-  compoentWillMount() {
+  componentWillMount() {
     this.props.getCurrentUser()
+    this.props.getCards()
   }
 
   render() {
@@ -42,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, {getCurrentUser})(App)
+export default connect(null, {getCurrentUser, getCards})(App)

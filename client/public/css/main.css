@@ -6,3 +6,7 @@
 .grid-item img{
   width: 100%
 }
+
+.grid-item iframe{
+  width: 100%
+}
