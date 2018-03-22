@@ -8,6 +8,7 @@ import Header from './Header'
 import Home from './Home'
 import MyCards from './MyCards'
 import AllCards from './AllCards'
+import UserCards from './UserCards'
 import Login from './Login'
 import Logout from './Logout'
 import Page404 from './Page404'
@@ -35,6 +36,7 @@ class App extends Component {
             <Route exact path='/My cards' component={MyCards} />
             <Route exact path='/Login' component={Login} />
             <Route exact path='/Logout' component={Logout} />
+            <Route exact path='/user/:id' component={UserCards} />
             <Route component={Page404} />
           </Switch>
         </div>

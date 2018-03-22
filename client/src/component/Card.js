@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import history from '../history'
+
 class Card extends Component {
   constructor(props) {
     super(props)
@@ -14,13 +16,21 @@ class Card extends Component {
     return () =>   this.props.like(_id)
   }
 
+  hundleUser(ownerID) {
+    return () => {console.log(ownerID); history.push('/user/' + ownerID)}
+  }
+
   render() {
-    var {src, description, user, likes, _id, type} = this.props
+    var {src, description, likes, _id, type, ownerID, ownerName} = this.props
     return (
       <div>
         {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen = {false}/>}
         <div>{description}</div>
-        <div>{user}</div>
+        <div
+          onClick = {this.hundleUser.bind(this)(ownerID)}
+        >
+          {ownerName}
+        </div>
         <div
           style ={{backgroundColor: 'yellow'}}
           onClick = {this.hundleLike.bind(this)(_id)}

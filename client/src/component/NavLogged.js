@@ -12,9 +12,9 @@ class NavLogged extends Component {
     return (
       <div>
         <Link to='/'>Home</Link>
-        <Link to='All cards'>All cards</Link>
-        <Link to='My cards'>My cards</Link>
-        <Link to='Logout'>Logout</Link>
+        <Link to='/All cards'>All cards</Link>
+        <Link to='/My cards'>My cards</Link>
+        <Link to='/Logout'>Logout</Link>
       </div>
     )
   }

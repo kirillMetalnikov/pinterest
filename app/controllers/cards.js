@@ -1,12 +1,33 @@
 var Card = require('../models/card')
+var User = require('../models/user')
 
 module.exports = function CardHundler() {
 
   this.getAll = (req, res) => {
-    Card
-      .find()
-      .exec()
-      .then(cards => res.json({cards}))
+    Promise.all([
+      Card.find().exec(),
+      User.find().exec()
+    ])
+      .then(([cards, users]) => {
+        cards = cards.map( card => {
+          var _id = card.ownerID
+          var user = users.filter( user => {
+            return user._id == _id
+          })[0]
+          var ownerName =
+            user.google
+              ? user.google.displayName
+              : user.github.displayName || user.github.username
+
+          // mongoose object is some other than we see in toString()
+          //without this method we can't add ownerName
+          var newCard = card.toObject()
+          // now it's OK
+          newCard.ownerName = ownerName
+          return newCard
+        })
+        res.json({cards})
+      })
       .catch(err => console.log(err))
   }
 

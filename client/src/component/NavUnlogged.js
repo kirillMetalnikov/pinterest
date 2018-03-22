@@ -12,8 +12,8 @@ class NavUnLogged extends Component {
     return (
       <div>
         <Link to='/'>Home</Link>
-        <Link to='All cards'>All cards</Link>
-        <Link to='Login'>Login</Link>
+        <Link to='/All cards'>All cards</Link>
+        <Link to='/Login'>Login</Link>
       </div>
     )
   }
