@@ -10,7 +10,8 @@ var User = new Schema({
   google: {
 		id: String,
 		displayName: String,
-	}
+	},
+	like: Array
 });
 
 module.exports = mongoose.model('Users', User);

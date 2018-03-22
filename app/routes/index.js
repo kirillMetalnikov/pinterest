@@ -43,7 +43,7 @@ module.exports = (app, passport) => {
 
   app.route('/api/cards/:_id')
     .delete(needLogin, cardHundler.delete)
-    .put(cardHundler.like)
+    .put(needLogin, cardHundler.like)
   app.route('/api/cards')
     .get(cardHundler.getAll)
     .post(needLogin, cardHundler.add)

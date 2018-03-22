@@ -14,19 +14,30 @@ class Card extends Component {
   }
 
 
-  hundleLike(_id) {
-    return () =>   this.props.like(_id)
+  hundleLike(_id, ownerID) {
+    return () =>  {
+      var {curentUser} = this.props
+      if (curentUser
+        && curentUser._id && curentUser._id != ownerID
+        && curentUser.like && curentUser.like.indexOf(_id) == -1
+      ){
+        console.log(curentUser)
+        console.log(ownerID)
+        this.props.like(_id)
+      }
+    }
   }
 
   hundleUser(ownerID) {
-    return () => {console.log(ownerID); history.push('/user/' + ownerID)}
+    return () => {history.push('/user/' + ownerID)}
   }
+
 
   render() {
     var {src, description, likes, _id, type, ownerID, ownerName, curentUser} = this.props
     return (
       <div>
-        {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen = {false}/>}
+        {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" />}
         <div>{description}</div>
         <div
           onClick = {this.hundleUser.bind(this)(ownerID)}
@@ -35,13 +46,12 @@ class Card extends Component {
         </div>
         <div
           style ={{backgroundColor: 'yellow'}}
-          onClick = {this.hundleLike.bind(this)(_id)}
+          onClick = {this.hundleLike.bind(this)(_id, ownerID)}
         >
           {likes}
         </div>
-        <div>{_id}</div>
-        {ownerID == curentUser._id
-          ? <button onClick={this.hundleDelete.bind(this)(_id)}>Delete</button>
+        {ownerID == curentUser && curentUser._id
+          ? <button onClick={this.hundleDelete.bind(this)(_id, ownerID)}>Delete</button>
           : null
         }
       </div>

@@ -41,6 +41,7 @@ export const like = _id => dispatch => {
   axios.put(`/api/cards/${_id}`)
     .then( res => {
       dispatch({type: LIKE, payload: res.data.card})
+      dispatch({type: CURRENT_USER, payload: res.data.user})
     })
 }
 

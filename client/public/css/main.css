@@ -10,3 +10,16 @@
 .grid-item iframe{
   width: 100%
 }
+
+.imagePreview {
+  height: 300px;
+  border: 1px solid gray
+}
+
+.imagePreview img {
+  height: 100%;
+}
+
+.imagePreview iframe {
+  height: 100%;
+}

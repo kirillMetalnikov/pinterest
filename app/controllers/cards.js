@@ -56,11 +56,17 @@ module.exports = function CardHundler() {
   }
 
   this.like = (req, res) => {
-    var {_id }= req.params
-    Card
-      .findByIdAndUpdate(_id, {$inc: {likes: 1}}, {new: true})
-      .exec()
-      .then(card => res.json({card}))
+    var cardID = req.params._id
+    var userID = req.user._id
+    Promise.all([
+      Card
+        .findByIdAndUpdate(cardID, {$inc: {likes: 1}}, {new: true})
+        .exec(),
+      User
+        .findByIdAndUpdate(userID, {$push: {like: cardID}}, {new: true})
+        .exec()
+    ])
+      .then(([card, user]) => res.json({card, user}))
       .catch(err => console.log(err))
   }
 }
