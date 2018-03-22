@@ -1,14 +1,14 @@
 import axios from 'axios'
+import history from '../history'
 
 import {
   ADD_CARD,
   GET_CARDS,
   DELETE_CARD,
-  LIKE
+  LIKE,
+  CURRENT_USER
 } from '../consts.js'
 
-
-var id = 6
 export const addCard = (src, type, description) => dispatch => {
   axios.post('/api/cards', {card: {src, type, description}})
     .then( res => {
@@ -46,13 +46,18 @@ export const like = _id => dispatch => {
 
 
 export const getCurrentUser = () => dispatch => {
-  console.log('getCurentUser')
+  axios.get('/api/user')
+    .then( res => {
+      if(res.data._id) {
+        dispatch({type: CURRENT_USER, payload: res.data})
+      }
+    })
 }
 
 export const logout = () => dispatch => {
-  console.log('logout')
-}
-
-export const login = () => dispatch => {
-  console.log('login')
+  axios.get('/auth/logout')
+    .then(res => {
+      dispatch({type: CURRENT_USER, payload: res.data.user})
+      history.push('/')
+    })
 }

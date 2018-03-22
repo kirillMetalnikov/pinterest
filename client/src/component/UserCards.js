@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {deleteCard, like} from '../actions'
+import {like} from '../actions'
 import CardList from './CardList'
-import FormAdd from './FormAdd'
 
 class UserCards extends Component {
   constructor(props) {
@@ -12,7 +11,20 @@ class UserCards extends Component {
 
   render() {
     console.log(this.props.match.params.id)
-    return <h1>User cards</h1>
+    var {cards} = this.props
+
+    cards = cards.filter( card => {
+      return card.ownerID == this.props.match.params.id
+    })
+
+    return (
+      <div>
+        <h1>User cards</h1>
+        <CardList
+          cards = {cards}
+        />
+      </div>
+    )
   }
 }
 
@@ -20,4 +32,4 @@ const mapStateToProps= ({cards}) => {
   return {cards}
 }
 
-export default connect()(UserCards)
+export default connect(mapStateToProps)(UserCards)

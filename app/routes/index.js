@@ -1,4 +1,5 @@
 var CardHundler = require ('../controllers/cards')
+var UserHUndler = require('../controllers/users')
 var path = process.cwd()
 
 const needLogin = (req, res, next) => {
@@ -11,6 +12,7 @@ const needLogin = (req, res, next) => {
 
 module.exports = (app, passport) => {
   var cardHundler = new CardHundler()
+  var userHundler = new UserHUndler()
 
   app.route('/')
     .get((req, res) => {
@@ -33,17 +35,19 @@ module.exports = (app, passport) => {
 			failureRedirect: '/failure'
     }))
 
-  app.route('/logout')
+  app.route('/auth/logout')
 	.get(function (req, res) {
-		req.logout();
-		res.redirect('/');
-	});
+		req.logout()
+		res.json({user: null})
+	})
 
   app.route('/api/cards/:_id')
     .delete(needLogin, cardHundler.delete)
-    .put(needLogin, cardHundler.like)
+    .put(cardHundler.like)
   app.route('/api/cards')
     .get(cardHundler.getAll)
     .post(needLogin, cardHundler.add)
 
+  app.route('/api/user/')
+    .get(needLogin, userHundler.current)
 }

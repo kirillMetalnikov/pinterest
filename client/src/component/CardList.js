@@ -37,7 +37,6 @@ class CardList extends Component {
 
   render() {
     var {cards} = this.props
-    var {like, deleteCard} = this.props
     return (
       <div className = 'masonry-grid' ref = 'msnryRef'>
           {cards.map( card => {
@@ -45,8 +44,6 @@ class CardList extends Component {
               <div  key = {card.id} className = 'grid-item'>
                 <Card
                   {...card}
-                  like = {like}
-                  deleteCard ={deleteCard}
                 />
               </div>
             )

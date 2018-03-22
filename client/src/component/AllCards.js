@@ -1,22 +1,28 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {getCards} from '../actions'
+import CardList from './CardList'
 
 class AllCards extends Component {
   constructor(props) {
     super(props)
   }
 
-  componentDidMount() {
-    this.props.getCards()
-  }
-
   render() {
+    var {cards} = this.props
+
     return (
-      <h1>AllCards</h1>
+      <div>
+        <h1>All Cards</h1>
+        <CardList
+          cards = {cards}
+        />
+      </div>
     )
   }
 }
 
-export default connect(null, {getCards})(AllCards)
+const mapStateToProps = (({cards}) => {
+  return {cards}
+})
+export default connect(mapStateToProps)(AllCards)

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {deleteCard, like} from '../actions'
 import CardList from './CardList'
 import FormAdd from './FormAdd'
 
@@ -11,8 +10,11 @@ class MyCards extends Component {
   }
 
   render() {
-    var {cards} = this.props
-    var {deleteCard, like} = this.props
+    var {cards, curentUser} = this.props
+
+    cards = cards.filter( card => {
+      return card.ownerID == (curentUser && curentUser._id)
+    })
 
     return (
       <div>
@@ -20,16 +22,14 @@ class MyCards extends Component {
         <FormAdd />
         <CardList
           cards = {cards}
-          deleteCard = {deleteCard}
-          like = {like}
         />
       </div>
     )
   }
 }
 
-const mapStateToProps= ({cards}) => {
-  return {cards}
+const mapStateToProps= ({cards, curentUser}) => {
+  return {cards, curentUser}
 }
 
-export default connect(mapStateToProps, {deleteCard, like})(MyCards)
+export default connect(mapStateToProps)(MyCards)

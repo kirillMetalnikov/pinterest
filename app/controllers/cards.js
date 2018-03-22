@@ -14,15 +14,14 @@ module.exports = function CardHundler() {
           var user = users.filter( user => {
             return user._id == _id
           })[0]
+
           var ownerName =
-            user.google
-              ? user.google.displayName
-              : user.github.displayName || user.github.username
+            user.google.displayName || user.github.displayName || user.github.username
 
           // mongoose object is some other than we see in toString()
-          //without this method we can't add ownerName
+          //without toObject() method we can't add ownerName
           var newCard = card.toObject()
-          // now it's OK
+
           newCard.ownerName = ownerName
           return newCard
         })

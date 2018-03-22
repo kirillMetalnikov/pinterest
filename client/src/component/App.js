@@ -21,7 +21,9 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.getCurrentUser()
+    if(!this.props.curentUser) {
+      this.props.getCurrentUser()
+    }
     this.props.getCards()
   }
 
@@ -45,4 +47,7 @@ class App extends Component {
   }
 }
 
-export default connect(null, {getCurrentUser, getCards})(App)
+const mapStateToProps = ({curentUser}) => {
+  return {curentUser}
+}
+export default connect(mapStateToProps, {getCurrentUser, getCards})(App)

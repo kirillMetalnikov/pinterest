@@ -5,15 +5,13 @@ import NavUnlogged from './NavUnlogged'
 
 class Header extends Component {
   render() {
-    var {user} = this.props
-    user = true
-
-    return user ? <NavLogged /> : <NavUnlogged />
+    var {curentUser} = this.props
+    return curentUser ? <NavLogged /> : <NavUnlogged />
   }
 }
 
-function mapStateToProps({user}) {
-  return {user}
+function mapStateToProps({curentUser}) {
+  return {curentUser}
 }
 
 export default connect(mapStateToProps)(Header)

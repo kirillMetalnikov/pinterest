@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import {authGoogle, authGithub} from '../actions'
+
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -8,7 +10,12 @@ class Login extends Component {
 
   render() {
     return (
-      <h1>Login</h1>
+      <div>
+        <h1>Login</h1>
+        <a href = '/auth/google'>google</a>
+        <br/>
+        <a href = '/auth/github'>github</a>
+      </div>
     )
   }
 }

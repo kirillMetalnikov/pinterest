@@ -3,7 +3,8 @@ import {
   ADD_CARD,
   GET_CARDS,
   DELETE_CARD,
-  LIKE
+  LIKE,
+  CURRENT_USER
 } from '../consts.js'
 
 const cards = (state = [], action) => {
@@ -22,7 +23,10 @@ const cards = (state = [], action) => {
     case LIKE:
       return state.map( card => {
         if(card._id == action.payload._id) {
-          return action.payload
+          // response from server without userName!
+          var newCard = Object.assign({}, card)
+          newCard.likes = action.payload.likes
+          return newCard
         }
         return card
       })
@@ -32,6 +36,16 @@ const cards = (state = [], action) => {
   }
 }
 
+const curentUser = ( state = null, action ) => {
+  switch (action.type) {
+    case CURRENT_USER:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  cards
+  cards,
+  curentUser
 })

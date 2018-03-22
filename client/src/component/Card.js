@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-
+import {connect} from 'react-redux'
 import history from '../history'
+
+import {deleteCard, like} from '../actions'
 
 class Card extends Component {
   constructor(props) {
@@ -21,7 +23,7 @@ class Card extends Component {
   }
 
   render() {
-    var {src, description, likes, _id, type, ownerID, ownerName} = this.props
+    var {src, description, likes, _id, type, ownerID, ownerName, curentUser} = this.props
     return (
       <div>
         {type == 'image' ? <img src = {src} /> : <iframe src = {src}  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen = {false}/>}
@@ -38,10 +40,16 @@ class Card extends Component {
           {likes}
         </div>
         <div>{_id}</div>
-        <button onClick={this.hundleDelete.bind(this)(_id)}>Delete</button>
+        {ownerID == curentUser._id
+          ? <button onClick={this.hundleDelete.bind(this)(_id)}>Delete</button>
+          : null
+        }
       </div>
     )
   }
 }
 
-export default Card
+const mapStateToProps = ({curentUser}) => {
+  return {curentUser}
+}
+export default connect(mapStateToProps, {deleteCard, like})(Card)
