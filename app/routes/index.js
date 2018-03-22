@@ -39,7 +39,11 @@ module.exports = (app, passport) => {
 		res.redirect('/');
 	});
 
+  app.route('/api/cards/:_id')
+    .delete(needLogin, cardHundler.delete)
+    .put(needLogin, cardHundler.like)
   app.route('/api/cards')
-    .get(cardHundler.getCards)
-    .post(needLogin, cardHundler.addCard)
+    .get(cardHundler.getAll)
+    .post(needLogin, cardHundler.add)
+
 }

@@ -21,10 +21,8 @@ const cards = (state = [], action) => {
 
     case LIKE:
       return state.map( card => {
-        if(card._id == action.payload) {
-          var newCard = Object.assign({}, card)
-          newCard.likes = ++newCard.likes
-          return newCard
+        if(card._id == action.payload._id) {
+          return action.payload
         }
         return card
       })

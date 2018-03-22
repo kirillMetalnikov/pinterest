@@ -29,12 +29,19 @@ export const getCards = () => dispatch => {
     })
 }
 
-export const deleteCard = (id) => dispatch => {
-  dispatch({type: DELETE_CARD, payload: id})
+export const deleteCard = (_id) => dispatch => {
+  axios.delete(`/api/cards/${_id}`)
+    .then( res => {
+      dispatch({type: DELETE_CARD, payload: res.data._id})
+    })
+
 }
 
-export const like = id => dispatch => {
-  dispatch({type: LIKE, payload: id})
+export const like = _id => dispatch => {
+  axios.put(`/api/cards/${_id}`)
+    .then( res => {
+      dispatch({type: LIKE, payload: res.data.card})
+    })
 }
 
 
