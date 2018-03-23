@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Container} from 'semantic-ui-react'
 
 import CardList from './CardList'
 
@@ -12,12 +13,12 @@ class AllCards extends Component {
     var {cards} = this.props
 
     return (
-      <div>
+      <Container>
         <h1>All Cards</h1>
         <CardList
           cards = {cards}
         />
-      </div>
+      </Container>
     )
   }
 }

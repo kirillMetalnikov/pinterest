@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Masonry from 'masonry-layout'
 import $ from 'jquery'
 
-import Card from './Card'
+import CardItem from './CardItem'
 
 class CardList extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class CardList extends Component {
   msnry() {
     new Masonry(this.refs.msnryRef, {
       itemSelector: '.grid-item',
-      columnWidth: 400
+      gutter: 50
     })
   }
 
@@ -39,15 +39,15 @@ class CardList extends Component {
     var {cards} = this.props
     return (
       <div className = 'masonry-grid' ref = 'msnryRef'>
-          {cards.map( card => {
-            return (
-              <div  key = {card.id} className = 'grid-item'>
-                <Card
-                  {...card}
-                />
-              </div>
-            )
-          })}
+        {cards.map( card => {
+          return (
+            <div  key = {card.id} className = 'grid-item'>
+              <CardItem
+                {...card}
+              />
+            </div>
+          )
+        })}
         </div>
     )
   }

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-
 import {Menu, Container} from 'semantic-ui-react'
 
 import history from '../history'
@@ -15,24 +14,48 @@ class NavMenu extends Component {
   }
 
   handleItemClick(e, { name }) {
-    console.log(name)
     this.setState({ activeItem: name })
     history.push(name)
   }
 
   renderNav(menuItems) {
     var {activeItem} = this.state
-    return menuItems.map( (item, index) => {
-      return(
-        <Menu.Item
-          key = {index}
-          name={item.to}
-          active={activeItem == item.to}
-          content={item.name}
-          onClick={this.handleItemClick}
-        />
-      )
+    var hello = this.props.curentUser ? 'Hello, ' + this.props.curentUser.name : ''
+    var leftItems = menuItems.filter( item => {
+      return !item.right
     })
+
+    var rightItems = menuItems.filter( item => {
+      return item.right
+    })
+
+    return(
+      <Menu size='large' pointing secondary color='transparent' inverted>
+        {leftItems.map( (item, index) => {
+          return(
+            <Menu.Item
+              key = {'left'+ index}
+              name={item.to}
+              active={activeItem == item.to}
+              content={item.name}
+              onClick={this.handleItemClick}
+            />
+          )
+        })}
+        <Menu.Menu position='right'>
+          <Menu.Item header>{hello}</Menu.Item>
+          {rightItems.map( (item, index) => {
+            return <Menu.Item
+              key = {'right'+ index}
+              name={item.to}
+              active={activeItem == item.to}
+              content={item.name}
+              onClick={this.handleItemClick}
+            />
+          })}
+        </Menu.Menu>
+      </Menu>
+    )
   }
 
   render() {
@@ -43,19 +66,17 @@ class NavMenu extends Component {
           {to: '/', name: 'Home'},
           {to: '/All cards', name: 'All cards'},
           {to: '/My cards', name: 'My cards'},
-          {to: '/Logout', name: 'Logout'}
+          {to: '/Logout', name: 'Logout', right: true}
         ]
       : [
           {to: '/', name: 'Home'},
           {to: '/All cards', name: 'All cards'},
-          {to: '/Login', name: 'Login'}
+          {to: '/Login', name: 'Login', right: true}
         ]
 
     return (
       <Container>
-        <Menu size='large' pointing secondary color='transparent' inverted>
-          {this.renderNav(menuItems)}
-        </Menu>
+        {this.renderNav(menuItems)}
       </Container>
     )
   }

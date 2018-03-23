@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Container} from 'semantic-ui-react'
 
 import CardList from './CardList'
 import FormAdd from './FormAdd'
@@ -17,13 +18,13 @@ class MyCards extends Component {
     })
 
     return (
-      <div>
+      <Container>
         <h1>MyCards</h1>
         <FormAdd />
         <CardList
           cards = {cards}
         />
-      </div>
+      </Container>
     )
   }
 }

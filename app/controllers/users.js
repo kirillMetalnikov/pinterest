@@ -9,13 +9,13 @@ module.exports = function CardHundler() {
     .then( user => {
       // mongoose object is some other than we see in toString()
       //without toObject() method we can't add ownerName
-      var newUser = user.toObject()
+      user = user.toObject()
 
       var name =
         user.google
           ? user.google.displayName
           : user.github.displayName || user.github.username
-      res.json({...newUser, name})
+      res.json({...user, name})
     })
     .catch(err => console.log(err))
   }

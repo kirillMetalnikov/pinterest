@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Container} from 'semantic-ui-react'
 
 import {like} from '../actions'
 import CardList from './CardList'
@@ -18,12 +19,12 @@ class UserCards extends Component {
     })
 
     return (
-      <div>
+      <Container>
         <h1>User cards</h1>
         <CardList
           cards = {cards}
         />
-      </div>
+      </Container>
     )
   }
 }
