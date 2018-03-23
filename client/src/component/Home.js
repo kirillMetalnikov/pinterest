@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import FullScreenImage from './FullScreenImage'
 class Home extends Component {
   constructor(props) {
     super(props)
@@ -8,7 +9,10 @@ class Home extends Component {
 
   render() {
     return (
-      <h1>Home</h1>
+      <div>
+        <FullScreenImage > <h1>FullScreen</h1> </FullScreenImage>
+        <h1>Home</h1>
+      </div>
     )
   }
 }
