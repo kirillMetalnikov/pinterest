@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import NavLogged from './NavLogged'
-import NavUnlogged from './NavUnlogged'
+
+import NavMenu from './NavMenu'
 
 class Header extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class Header extends Component {
   componentDidMount() {
     window.onscroll = () => this.setState({onScroll: document.documentElement.scrollTop})
   }
+
   
   render() {
-    var {curentUser} = this.props
     var opacity = this.state.onScroll < 150 ? 0 + this.state.onScroll / 150 : 1
     var height = this.state.onScroll < 150 ? 70 - 10 * this.state.onScroll / 150 : 60
     return (
@@ -29,7 +29,7 @@ class Header extends Component {
           boxShadow: '0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)'
           
         }}>
-          {curentUser ? <NavLogged /> : <NavUnlogged />}
+        <NavMenu />
         </div>
         <div style = {{position: 'static', height}}></div>
       </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Container} from 'semantic-ui-react'
 
 class FullScreenImage extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class FullScreenImage extends Component {
             zIndex: -1,
             height: this.state.clientHeight,
             width: '100%',
-            backgroundImage: ' url(http://blackwood.ru/photos/sale/18117/18117_219427-kvartira-leningradskoe-shosse-d-23-2048.jpg)',
+            backgroundImage: 'url(http://img-b.photosight.ru/0ff/3641440_large.jpeg)',
             backgroundSize: 'cover'
         }}>
           <div
@@ -39,8 +40,10 @@ class FullScreenImage extends Component {
             }}
           >
           </div>
-          <div>
-            {this.props.children}
+          <div style = {{marginTop: 100}}>
+            <Container>
+              {this.props.children}
+            </Container>
           </div>
         </div>
         <div style = {{height: this.state.clientHeight}}></div>

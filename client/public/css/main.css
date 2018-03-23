@@ -1,4 +1,6 @@
-
+body {
+  background: linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%)
+}
 .grid-item {
   width: 400px;
   border: 1px solid gray;
@@ -23,4 +25,8 @@
 
 .imagePreview iframe {
   height: 100%;
+}
+
+.ui.secondary.inverted.pointing.menu {
+  border-width: 0px;
 }
