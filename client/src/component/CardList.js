@@ -11,27 +11,31 @@ class CardList extends Component {
   }
 
   componentDidMount() {
-    this.msnry()
-    this.errorImg()
+    this.loadImg.bind(this)()
+//    this.msnry()
   }
 
   componentDidUpdate() {
-    this.msnry()
-    this.errorImg()
+    this.loadImg.bind(this)()
+//    this.msnry()
   }
 
-  errorImg() {
+  loadImg() {
     var componentThis = this
-    $('img').on('error', function () { // () => {} is not right form escription, because 'this' not bind with 'img'
-        $(this).attr('src', '/public/img/missing.png')
-        componentThis.msnry.bind(componentThis)()
+    $('img, iframe')
+      .on('error', function () { // () => {} is not right form escription, because 'this' not bind with 'img'
+        $(this)
+        .attr('src', '/public/img/missing.png')
+//        .on('load', componentThis.msnry.bind(componentThis))
       })
+      .on('load', componentThis.msnry.bind(componentThis))
   }
 
   msnry() {
     new Masonry(this.refs.msnryRef, {
       itemSelector: '.grid-item',
-      gutter: 50
+      gutter: 15,
+      isFitWidth: true
     })
   }
 

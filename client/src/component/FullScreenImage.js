@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container} from 'semantic-ui-react'
 
 class FullScreenImage extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ class FullScreenImage extends Component {
   }
 
   render() {
+    var {top, left} = this.props
     return (
       <div>
         <div
@@ -40,13 +40,14 @@ class FullScreenImage extends Component {
             }}
           >
           </div>
-          <div style = {{marginTop: 100}}>
-            <Container>
-              {this.props.children}
-            </Container>
-          </div>
         </div>
-        <div style = {{height: this.state.clientHeight}}></div>
+        <div style = {{
+          paddingTop: top,
+          paddingLeft: left,
+          height: this.state.clientHeight - 70
+        }}>
+          {this.props.children}
+        </div>
       </div>
     )
   }

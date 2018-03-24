@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container} from 'semantic-ui-react'
+import {Container, Header} from 'semantic-ui-react'
 
 import {like} from '../actions'
 import CardList from './CardList'
@@ -11,7 +11,6 @@ class UserCards extends Component {
   }
 
   render() {
-    console.log(this.props.match.params.id)
     var {cards} = this.props
 
     cards = cards.filter( card => {
@@ -19,12 +18,16 @@ class UserCards extends Component {
     })
 
     return (
-      <Container>
-        <h1>User cards</h1>
-        <CardList
-          cards = {cards}
-        />
-      </Container>
+      cards.length
+        ? <Container>
+            <div className = 'header'>
+              <h1><span>Cards of </span>{cards[0].ownerName}</h1>
+            </div>
+            <CardList
+              cards = {cards}
+            />
+          </Container>
+        : null
     )
   }
 }

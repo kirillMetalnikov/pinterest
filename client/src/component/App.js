@@ -32,6 +32,7 @@ class App extends Component {
       <Router history= {history}>
         <div>
           <Header />
+
           <Switch>
             <Route exact path ='/' component={Home} />
             <Route exact path ='/All cards' component={AllCards} />
@@ -41,6 +42,7 @@ class App extends Component {
             <Route exact path='/user/:id' component={UserCards} />
             <Route component={Page404} />
           </Switch>
+          <div className = 'footer' >powered by <a href = 'https://github.com/kirillMetalnikov'  target='_blank' >Kirill Metalnikov</a></div>
         </div>
       </Router>
     )

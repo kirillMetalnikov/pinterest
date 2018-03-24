@@ -1,10 +1,13 @@
 body {
   background: linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
-  background-attachment: fixed
+  background-attachment: fixed;
+}
+.masonry-grid {
+  margin: 0 auto;
 }
 
 .grid-item {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .grid-item img{
   width: 100%
@@ -15,8 +18,10 @@ body {
 }
 
 .imagePreview {
-  height: 300px;
-  border: 1px solid gray
+  height: 250px;
+  border: 2px dashed gray;
+  padding: 5px;
+  text-align: center;
 }
 
 .imagePreview img {
@@ -27,6 +32,30 @@ body {
   height: 100%;
 }
 
+.imagePreview div {
+  padding: 10%;
+  color: red
+}
+
 .ui.secondary.inverted.pointing.menu {
   border-width: 0px;
+}
+
+.card .header:hover {
+  background-color: #cce2ff;
+  cursor: pointer;
+}
+
+.footer {
+  height: 50px;
+  margin: -50px 3%;
+  text-align: right;
+}
+
+.header {
+  padding: 1%;
+}
+
+.header span {
+  color: white;
 }

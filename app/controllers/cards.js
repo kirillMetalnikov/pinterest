@@ -66,7 +66,7 @@ module.exports = function CardHundler() {
         .findByIdAndUpdate(userID, {$push: {like: cardID}}, {new: true})
         .exec()
     ])
-      .then(([card, user]) => res.json({card, user}))
+      .then(([card, user]) => res.json({card}))
       .catch(err => console.log(err))
   }
 }

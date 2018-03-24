@@ -19,7 +19,6 @@ class MyCards extends Component {
 
     return (
       <Container>
-        <h1>MyCards</h1>
         <FormAdd />
         <CardList
           cards = {cards}

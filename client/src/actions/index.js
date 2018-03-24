@@ -6,7 +6,8 @@ import {
   GET_CARDS,
   DELETE_CARD,
   LIKE,
-  CURRENT_USER
+  CURRENT_USER,
+  USER_LIKE
 } from '../consts.js'
 
 export const addCard = (src, type, description) => dispatch => {
@@ -38,10 +39,15 @@ export const deleteCard = (_id) => dispatch => {
 }
 
 export const like = _id => dispatch => {
+  //USER_LIKE and LIKE are diferences because:
+  //  LIKE get new data from server
+  //    (other users can like the card and it will be beatiful if we see new count of likes)
+  //  USER_LIKE need quick dispatch store to user can't click twice or more on button 'like'
+  //    data from backend come with latency)
+  dispatch({type: USER_LIKE, payload: _id})
   axios.put(`/api/cards/${_id}`)
     .then( res => {
       dispatch({type: LIKE, payload: res.data.card})
-      dispatch({type: CURRENT_USER, payload: res.data.user})
     })
 }
 

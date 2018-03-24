@@ -4,7 +4,8 @@ import {
   GET_CARDS,
   DELETE_CARD,
   LIKE,
-  CURRENT_USER
+  CURRENT_USER,
+  USER_LIKE
 } from '../consts.js'
 
 const cards = (state = [], action) => {
@@ -40,6 +41,10 @@ const curentUser = ( state = null, action ) => {
   switch (action.type) {
     case CURRENT_USER:
       return action.payload
+    case USER_LIKE:
+    var newCard = Object.assign({}, state)
+    newCard.like.push(action.payload)
+      return newCard
     default:
       return state
   }
