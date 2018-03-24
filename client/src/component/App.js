@@ -32,13 +32,12 @@ class App extends Component {
       <Router history= {history}>
         <div>
           <Header />
-
           <Switch>
             <Route exact path ='/' component={Home} />
-            <Route exact path ='/All cards' component={AllCards} />
-            <Route exact path='/My cards' component={MyCards} />
-            <Route exact path='/Login' component={Login} />
-            <Route exact path='/Logout' component={Logout} />
+            <Route exact path ='/all cards' component={AllCards} />
+            <Route exact path='/my cards' component={MyCards} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/logout' component={Logout} />
             <Route exact path='/user/:id' component={UserCards} />
             <Route component={Page404} />
           </Switch>

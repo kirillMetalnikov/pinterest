@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { Card, Icon, Image, Button, Label } from 'semantic-ui-react'
+import { Card, Icon, Image, Button, Label, Popup } from 'semantic-ui-react'
 
 import history from '../history'
 import {deleteCard, like} from '../actions'
@@ -26,16 +26,15 @@ class CardItem extends Component {
       var {curentUser} = this.props
       if (this.canLike(_id, ownerID)){
         this.props.like(_id)
-      } else {
-        console.log("you can't like")
       }
     }
   }
 
   hundleUser(ownerID) {
-    return () => {history.push('/user/' + ownerID)}
+    return () => {
+      history.push('/user/' + ownerID)
+    }
   }
-
 
   render() {
     var {src, description, likes, _id, type, ownerID, ownerName, curentUser} = this.props
@@ -51,13 +50,28 @@ class CardItem extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button as='div' labelPosition='right' onClick = {this.hundleLike.bind(this)(_id, ownerID)}>
-            <Button icon color='blue' disabled = {!this.canLike.bind(this)(_id, ownerID)}>
-              <Icon name='like outline' />
-              Like
-            </Button>
-            <Label as='a' basic color='blue' pointing='left'>{likes}</Label>
-          </Button>
+          <Popup
+            flowing
+            hoverable
+            trigger={
+              <Button as='div' labelPosition='right' onClick = {this.hundleLike.bind(this)(_id, ownerID)}>
+                <Button icon color='blue' disabled = {!this.canLike.bind(this)(_id, ownerID)}>
+                  <Icon name='like outline' />
+                  Like
+                </Button>
+                <Label as='a' basic color='blue' pointing='left'>{likes}</Label>
+              </Button>
+            }
+            content={
+              curentUser
+                ? curentUser._id == ownerID
+                  ? <span>{"You can't like to your card"}</span>
+                  : curentUser.like.indexOf(_id) == -1
+                    ? <span>Click to like</span>
+                    : <span>{"You're alredy liked"}</span>
+                : <span>You need <a href = '/login'>login</a></span>
+            }
+          />
           {ownerID == (curentUser && curentUser._id)
             ? <Button floated='right' onClick={this.hundleDelete.bind(this)(_id, ownerID)} basic color= 'blue'>Delete</Button>
             : null

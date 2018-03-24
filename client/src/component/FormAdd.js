@@ -16,7 +16,6 @@ class FormAdd extends Component {
 
     if(this.state.type == 'video') {
       if(link.indexOf('youtube.com') == -1) {
-        console.log('Error: Need youtube only')
         this.setState({link: '', description: ''})
         return
       }
@@ -42,7 +41,6 @@ class FormAdd extends Component {
 
   render() {
     var {link, type, description} = this.state
-    console.log('link.indexOf("youtube.com")', link.indexOf('youtube.com'))
     return (
       <div style ={{margin: '5% 0'}}>
         <Segment padded>

@@ -8,8 +8,8 @@ import {logout} from '../actions'
 class NavMenu extends Component {
   constructor(props) {
     super(props)
-    var location = history.location.pathname
-    this.state = { activeItem: location }
+
+    this.state = { activeItem: history.location.pathname }
     this.handleItemClick = this.handleItemClick.bind(this)
   }
 
@@ -64,14 +64,14 @@ class NavMenu extends Component {
     var menuItems = curentUser
       ? [
           {to: '/', name: 'Home'},
-          {to: '/All cards', name: 'All cards'},
-          {to: '/My cards', name: 'My cards'},
-          {to: '/Logout', name: 'Logout', right: true}
+          {to: '/all cards', name: 'All cards'},
+          {to: '/my cards', name: 'My cards'},
+          {to: '/logout', name: 'Logout', right: true}
         ]
       : [
           {to: '/', name: 'Home'},
-          {to: '/All cards', name: 'All cards'},
-          {to: '/Login', name: 'Login', right: true}
+          {to: '/all cards', name: 'All cards'},
+          {to: '/login', name: 'Login', right: true}
         ]
 
     return (
